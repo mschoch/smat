@@ -14,6 +14,8 @@ By doing this, two things are possible:
 
 [![Build Status](https://travis-ci.org/mschoch/smat.svg?branch=master)](https://travis-ci.org/mschoch/smat)
 
+[![Coverage Status](https://coveralls.io/repos/github/mschoch/smat/badge.svg?branch=master)](https://coveralls.io/github/mschoch/smat?branch=master)
+
 ## License
 
 Apache 2.0
