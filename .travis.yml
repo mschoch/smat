@@ -10,7 +10,7 @@ script:
 - go vet
 - errcheck ./...
 - go test -coverprofile=profile.out -covermode=count
-#- goveralls -service=travis-ci -coverprofile=profile.out -repotoken $COVERALLS
+- goveralls -service=travis-ci -coverprofile=profile.out -repotoken $COVERALLS
 notifications:
   email:
   - marty.schoch@gmail.com
