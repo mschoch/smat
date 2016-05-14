@@ -27,7 +27,9 @@ func (a ActionSeq) ByteEncoding(ctx Context, setup, teardown ActionID, actionMap
 	if err != nil {
 		return nil, err
 	}
-	defer teardownFunc(ctx)
+	defer func() {
+		_, _ = teardownFunc(ctx)
+	}()
 
 	var rv []byte
 	for _, actionID := range a {

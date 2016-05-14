@@ -117,8 +117,9 @@ func runReader(ctx Context, setup, teardown ActionID, actionMap ActionMap, r io.
 	}
 	defer func() {
 		Logger.Printf("invoking teardown action")
-		teardownFunc(ctx)
+		_, _ = teardownFunc(ctx)
 	}()
+
 	reader := bufio.NewReader(r)
 	for next, err := reader.ReadByte(); err == nil; next, err = reader.ReadByte() {
 		select {
