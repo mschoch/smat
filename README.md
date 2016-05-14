@@ -12,9 +12,13 @@ By doing this, two things are possible:
 
 ## Status
 
+The API is still not stable.  This is brand new and we'll probably change things we don't like...
+
 [![Build Status](https://travis-ci.org/mschoch/smat.svg?branch=master)](https://travis-ci.org/mschoch/smat)
 [![Coverage Status](https://coveralls.io/repos/github/mschoch/smat/badge.svg?branch=master)](https://coveralls.io/github/mschoch/smat?branch=master)
 [![GoDoc](https://godoc.org/github.com/mschoch/smat?status.svg)](https://godoc.org/github.com/mschoch/smat)
+[![codebeat badge](https://codebeat.co/badges/c3ff6180-a241-4128-97f0-fa6bf6f48752)](https://codebeat.co/projects/github-com-mschoch-smat)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mschoch/smat)](https://goreportcard.com/report/github.com/mschoch/smat)
 
 ## License
 
