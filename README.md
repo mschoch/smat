@@ -10,6 +10,10 @@ By doing this, two things are possible:
 
 **NOTE**: both of these can also incorporate validation logic (not just failure detection by building validation into the state machine)
 
+## Status
+
+[![Build Status](https://travis-ci.org/mschoch/smat.svg?branch=master)](https://travis-ci.org/mschoch/smat)
+
 ## License
 
 Apache 2.0
