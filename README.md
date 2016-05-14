@@ -8,7 +8,7 @@ By doing this, two things are possible:
 
 2.  Automate longevity testing of your application by performing long sequences of valid operations.
 
-NOTE: both of these can also incorporate validation logic (not just failure detection by building validation into the state machine)
+**NOTE**: both of these can also incorporate validation logic (not just failure detection by building validation into the state machine)
 
 ## License
 
@@ -43,7 +43,7 @@ func dbOpen(next byte) smat.ActionID {
 }
 ```
 
-This says that in the open state, there are two valid actions, 50% of the time you should set a value and 50% of the time you should delete a value.  NOTE: these percentages are just for characterizing the test workload.
+This says that in the open state, there are two valid actions, 50% of the time you should set a value and 50% of the time you should delete a value.  **NOTE**: these percentages are just for characterizing the test workload.
 
 ### smat.Action
 
