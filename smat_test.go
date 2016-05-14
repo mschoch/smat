@@ -243,8 +243,8 @@ func TestLongevity(t *testing.T) {
 	ctx := &testContext{t: t}
 	wg := sync.WaitGroup{}
 	closeChan := make(chan struct{})
+	wg.Add(1)
 	go func() {
-		wg.Add(1)
 		err = Longevity(ctx, setup, teardown, actionMap, 0, closeChan)
 		wg.Done()
 	}()
