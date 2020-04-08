@@ -32,7 +32,7 @@ Choose a structure to keep track of any state.  You pass in an instance of this 
 
 For example, consider a database library, once you open a database handle, you need to use it inside of the other actions.  So you might use a structure like:
 
-```
+```go
 type context struct {
   db *DB
 }
@@ -44,7 +44,7 @@ A state represents a state that your application/library can be in, and the prob
 
 For example, consider a database library, in a state where the database is open, there many things you can do.  Let's consider just two right now, you can set a value, or you can delete a value.
 
-```
+```go
 func dbOpen(next byte) smat.ActionID {
 	return smat.PercentExecute(next,
 		smat.PercentAction{50, setValue},
@@ -59,7 +59,7 @@ This says that in the open state, there are two valid actions, 50% of the time y
 
 Actions are functions that do some work, optionally mutate the context, and indicate the next state to transition to.  Below we see an example action to set value in a database.
 
-```
+```go
 func setValueFunc(ctx smat.Context) (next smat.State, err error) {
   // type assert to our custom context type
 	context := ctx.(*context)
@@ -77,7 +77,7 @@ func setValueFunc(ctx smat.Context) (next smat.State, err error) {
 
 Actions are just functions, and since we can't compare functions in Go, we need to introduce an external identifier for them.  This allows us to build a bi-directional mapping which we'll take advantage of later.
 
-```
+```go
 const (
   setup smat.ActionID = iota
   teardown
@@ -97,7 +97,7 @@ var actionMap = smat.ActionMap{
 
 A common way that many users think about a library is as a sequence of actions to be performed.  Using the ActionID's that we've already seen we can build up sequences of operations.
 
-```
+```go
   actionSeq := smat.ActionSeq{
 		open,
 		setValue,
@@ -112,7 +112,7 @@ Notice that we build these actions using the constants we defined above, and bec
 
 We've built a lot of pieces, lets wire it up to go-fuzz.
 
-```
+```go
 func Fuzz(data []byte) int {
 	return smat.Fuzz(&context{}, setup, teardown, actionMap, data)
 }
@@ -128,13 +128,15 @@ func Fuzz(data []byte) int {
 
 Earlier we mentioned the bi-directional mapping between Actions and the byte stream driving the state machine.  We can now leverage this to build the inital go-fuzz corpus.
 
-Using the `ActinSeq`s we learned about earlier we can build up a list of them as:
+Using the `ActionSeq`s we learned about earlier we can build up a list of them as:
 
-    var actionSeqs = []smat.ActionSeq{...}
+```go
+var actionSeqs = []smat.ActionSeq{...}
+```
 
 Then, we can write them out to disk using:
 
-```
+```go
 for i, actionSeq := range actionSeqs {
   byteSequence, err := actionSeq.ByteEncoding(&context{}, setup, teardown, actionMap)
   if err != nil {
@@ -153,7 +155,7 @@ Fuzzing is great, but most of your corpus is likely to be shorter meaningful seq
 
 For these cases we have another helper you can use:
 
-```
+```go
   Longevity(ctx, setup, teardown, actionMap, 0, closeChan)
 ```
 
